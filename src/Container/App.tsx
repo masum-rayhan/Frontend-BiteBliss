@@ -1,6 +1,6 @@
 import { Footer, Header } from "../Components/Layout"
 import { Routes, Route } from "react-router-dom";
-import { Home, NotFound } from "../Pages";
+import { Home, MenuItemDetails, NotFound } from "../Pages";
 
 
 const App = () => {
@@ -33,10 +33,10 @@ const App = () => {
       <div className="pb-5">
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          {/* <Route
+          <Route
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetails />}
-          ></Route> */}
+          ></Route>
           {/* <Route path="/shopping-cart" element={<ShoppingCart />}></Route> */}
           {/* <Route path="/register" element={<Register />}></Route> */}
           {/* <Route path="/login" element={<Login />}></Route> */}

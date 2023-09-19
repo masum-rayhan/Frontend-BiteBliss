@@ -4,9 +4,20 @@ import App from './Container/App'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    {/* <Provider store={store}> */}
+      <BrowserRouter>
+        {/* <ToastContainer /> */}
+        <App />
+      </BrowserRouter>
+    {/* </Provider> */}
+  </React.StrictMode>
+);
+

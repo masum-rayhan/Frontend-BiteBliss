@@ -1,17 +1,7 @@
-import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/mango.png";
 
 const Header = () => {
-  const [menuItems, setMenuItems] = useState([]);
-
-  useEffect(() => {
-    fetch("https://foodfancywebapi.azurewebsites.net/menuItem")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
-
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -33,9 +23,9 @@ const Header = () => {
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
-          {/* <NavLink className="nav-link" aria-current="page" to="/">
+          <NavLink className="nav-link" aria-current="page" to="/">
             <img src={logo} style={{ height: "40px" }} className="m-1" alt="" />
-          </NavLink> */}
+          </NavLink>
 
           <button
             className="navbar-toggler"
@@ -51,9 +41,9 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
               <li className="nav-item">
-                {/* <NavLink className="nav-link" aria-current="page" to="/">
+                <NavLink className="nav-link" aria-current="page" to="/">
                   Home
-                </NavLink> */}
+                </NavLink>
               </li>
               <li className="nav-item">
                 {/* <NavLink

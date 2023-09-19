@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { menuItemReducer } from "./menuItemSlice";
+import { menuItemApi } from "../../Apis";
 
 
 const store = configureStore({
@@ -8,7 +9,7 @@ const store = configureStore({
     // shoppingCartStore: shoppingCartReducer,
     // userAuthStore: userAuthReducer,
     
-    // [menuItemApi.reducerPath]: menuItemApi.reducer,
+    [menuItemApi.reducerPath]: menuItemApi.reducer,
     // [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
     // [authApi.reducerPath]: authApi.reducer,
     // [paymentApi.reducerPath]: paymentApi.reducer,
@@ -16,7 +17,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-    //   .concat(menuItemApi.middleware)
+      .concat(menuItemApi.middleware)
     //   .concat(shoppingCartApi.middleware)
     //   .concat(authApi.middleware)
     //   .concat(paymentApi.middleware)

@@ -9,27 +9,27 @@ interface Props {
 
 const MenuItemCard = (props : Props) => {
 //   const navigate = useNavigate();
-//   const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
-//   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+  //const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
 //   const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
-//   const handleAddToCart = async (menuItemId: number) => {
-//     if (!userData.nameid) {
-//       navigate("/login");
-//       return;
-//     }
-//     setIsAddingToCart(true);
+  // const handleAddToCart = async (menuItemId: number) => {
+  //   if (!userData.nameid) {
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   setIsAddingToCart(true);
 
-//     const response : apiResponse = await updateShoppingCart({
-//       userId: userData.nameid,
-//       menuItemId: menuItemId,
-//       updateQuantityBy: 1
-//     });
-//     if(response.data && response.data.isSuccess) {
-//       toastNotify("Item added to cart successfully");
-//     }
-//     setIsAddingToCart(false);
-//   };
+  //   const response : apiResponse = await updateShoppingCart({
+  //     userId: userData.nameid,
+  //     menuItemId: menuItemId,
+  //     updateQuantityBy: 1
+  //   });
+  //   if(response.data && response.data.isSuccess) {
+  //     toastNotify("Item added to cart successfully");
+  //   }
+  //   setIsAddingToCart(false);
+  // };
 
   
   return (
@@ -49,7 +49,7 @@ const MenuItemCard = (props : Props) => {
               />
             </Link>
           </div>
-          {/* {props.menuItem.specialTag &&
+          {props.menuItem.specialTag &&
             props.menuItem.specialTag.length > 0 && (
               <i
                 className="bi bi-star btn btn-success"
@@ -75,7 +75,7 @@ const MenuItemCard = (props : Props) => {
                 right: "15px",
               }}
             >
-              <MiniLoader />
+              {/* <MiniLoader /> */}
             </div>
           ) : (
             <i
@@ -89,28 +89,28 @@ const MenuItemCard = (props : Props) => {
                 outline: "none !important",
                 cursor: "pointer",
               }}
-              onClick={() => handleAddToCart(props.menuItem.id)}
+              // onClick={() => handleAddToCart(props.menuItem.id)}
             ></i>
-          )} */}
+          )}
 
           <div className="text-center">
             <p className="card-title m-0 text-success fs-3">
-              {/* <Link
+              <Link
                 to={`/menuItemDetails/${props.menuItem.id}`}
                 style={{ textDecoration: "none", color: "green" }}
               >
                 {props.menuItem.name}
-              </Link> */}
+              </Link>
             </p>
             <p className="badge bg-secondary" style={{ fontSize: "12px" }}>
-              {/* {props.menuItem.category} */}
+              {props.menuItem.category}
             </p>
           </div>
           <p className="card-text" style={{ textAlign: "center" }}>
-            {/* {props.menuItem.description} */}
+            {props.menuItem.description}
           </p>
           <div className="row text-center">
-            {/* <h4>${props.menuItem.price}</h4> */}
+            <h4>${props.menuItem.price}</h4>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ const MenuItemList = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
-console.log(data) 
+  console.log(data);
   return (
     <div className="container row">
       {data.result.length > 0 &&

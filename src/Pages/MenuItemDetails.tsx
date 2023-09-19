@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useGetMenuItemsByIdQuery } from "../Apis/menuItemApi";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const MenuItemDetails = () => {
 //   const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
-//   const { menuItemId } = useParams();
-//   const { data, isLoading } = useGetMenuItemsByIdQuery(menuItemId);
+  const { menuItemId } = useParams();
+  const { data, isLoading } = useGetMenuItemsByIdQuery(menuItemId);
 
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
 //   const [quantity, setQuantity] = useState(1);
 //   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
@@ -42,7 +43,7 @@ const MenuItemDetails = () => {
 
   return (
     <div className="container pt-4 pt-md-5">
-      {/* {!isLoading ? (
+      {!isLoading ? (
         <div className="row">
           <div className="col-7">
             <h2 className="text-success">{data.result?.name}</h2>
@@ -71,19 +72,19 @@ const MenuItemDetails = () => {
               style={{ border: "1px solid #333", borderRadius: "30px" }}
             >
               <i
-                onClick={() => handleQuantity(-1)}
+                // onClick={() => handleQuantity(-1)}
                 className="bi bi-dash p-1"
                 style={{ fontSize: "25px", cursor: "pointer" }}
               ></i>
-              <span className="h3 mt-3 px-3">{quantity}</span>
+              {/* <span className="h3 mt-3 px-3">{quantity}</span> */}
               <i
-                onClick={() => handleQuantity(+1)}
+                // onClick={() => handleQuantity(+1)}
                 className="bi bi-plus p-1"
                 style={{ fontSize: "25px", cursor: "pointer" }}
               ></i>
             </span>
             <div className="row pt-4">
-              <div className="col-5">
+              {/* <div className="col-5">
                 {isAddingToCart ? (
                   <button disabled className="btn btn-success form-control">
                     <MiniLoader />
@@ -96,7 +97,7 @@ const MenuItemDetails = () => {
                     Add to Cart
                   </button>
                 )}
-              </div>
+              </div> */}
 
               <div className="col-5 ">
                 <button
@@ -122,9 +123,9 @@ const MenuItemDetails = () => {
           className="d-flex justify-content-center"
           style={{ width: "100%" }}
         >
-          <MainLoader />
+          {/* <MainLoader /> */}
         </div>
-      )} */}
+      )}
     </div>
   );
 };

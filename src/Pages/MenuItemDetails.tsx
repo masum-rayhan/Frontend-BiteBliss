@@ -1,45 +1,46 @@
+import { useState } from "react";
 import { useGetMenuItemsByIdQuery } from "../Apis/menuItemApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 
 const MenuItemDetails = () => {
-//   const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  // const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
   const { menuItemId } = useParams();
   const { data, isLoading } = useGetMenuItemsByIdQuery(menuItemId);
 
   const navigate = useNavigate();
 
-//   const [quantity, setQuantity] = useState(1);
-//   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState(1);
+  const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
 //   const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
-//   const handleQuantity = (event: number) => {
-//     let newQuantity = quantity + event;
-//     if (newQuantity == 0) {
-//       newQuantity = 1;
-//     }
-//     setQuantity(newQuantity);
-//   };
+  const handleQuantity = (event: number) => {
+    let newQuantity = quantity + event;
+    if (newQuantity == 0) {
+      newQuantity = 1;
+    }
+    setQuantity(newQuantity);
+  };
 
-//   const handleAddToCart = async (menuItemId: number) => {
-//     if (!userData.nameid) {
-//       navigate("/login");
-//       return;
-//     }
-//     setIsAddingToCart(true);
+  // const handleAddToCart = async (menuItemId: number) => {
+  //   if (!userData.nameid) {
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   setIsAddingToCart(true);
 
-//     const response : apiResponse= await updateShoppingCart({
-//       userId: userData.nameid,
-//       menuItemId: menuItemId,
-//       updateQuantityBy: quantity,
-//     });
+  //   const response : apiResponse= await updateShoppingCart({
+  //     userId: userData.nameid,
+  //     menuItemId: menuItemId,
+  //     updateQuantityBy: quantity,
+  //   });
 
-//     if(response.data && response.data.isSuccess){
-//       toastNotify("Item added to cart successfully");
-//     }
+  //   if(response.data && response.data.isSuccess){
+  //     toastNotify("Item added to cart successfully");
+  //   }
 
-//     setIsAddingToCart(false);
-//   };
+  //   setIsAddingToCart(false);
+  // };
 
   return (
     <div className="container pt-4 pt-md-5">
@@ -72,32 +73,32 @@ const MenuItemDetails = () => {
               style={{ border: "1px solid #333", borderRadius: "30px" }}
             >
               <i
-                // onClick={() => handleQuantity(-1)}
+                onClick={() => handleQuantity(-1)}
                 className="bi bi-dash p-1"
                 style={{ fontSize: "25px", cursor: "pointer" }}
               ></i>
-              {/* <span className="h3 mt-3 px-3">{quantity}</span> */}
+              <span className="h3 mt-3 px-3">{quantity}</span>
               <i
-                // onClick={() => handleQuantity(+1)}
+                onClick={() => handleQuantity(+1)}
                 className="bi bi-plus p-1"
                 style={{ fontSize: "25px", cursor: "pointer" }}
               ></i>
             </span>
             <div className="row pt-4">
-              {/* <div className="col-5">
+              <div className="col-5">
                 {isAddingToCart ? (
                   <button disabled className="btn btn-success form-control">
-                    <MiniLoader />
+                    {/* <MiniLoader /> */}
                   </button>
                 ) : (
                   <button
-                    onClick={() => handleAddToCart(data.result?.id)}
+                    // onClick={() => handleAddToCart(data.result?.id)}
                     className="btn btn-success form-control"
                   >
                     Add to Cart
                   </button>
                 )}
-              </div> */}
+              </div>
 
               <div className="col-5 ">
                 <button

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { useEffect } from "react";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
-import { Login, Register } from "../Pages/Auth";
+import { AccessDenied, AuthTest, AuthTestAdmin, Login, Register } from "../Pages/Auth";
 import jwt_decode from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
@@ -49,9 +49,9 @@ const App = () => {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login" element={<Login />}></Route>
 
-          {/* <Route path="/authentication" element={<AuthTest />}></Route> */}
-          {/* <Route path="/authorization" element={<AuthTestAdmin />}></Route> */}
-          {/* <Route path="/accessDenied" element={<AccessDenied />}></Route> */}
+          <Route path="/authentication" element={<AuthTest />}></Route>
+          <Route path="/authorization" element={<AuthTestAdmin />}></Route>
+          <Route path="/accessDenied" element={<AccessDenied />}></Route>
 
           {/* <Route path="/payment" element={<Payment />}></Route> */}
           {/* <Route path="/order/orderConfirmed/:id" element={<OrderConfirmed />}></Route> */}

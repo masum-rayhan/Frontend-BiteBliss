@@ -1,6 +1,7 @@
 import { cartItemModel } from "../../../Interfaces";
+import { orderSummaryProps } from "./orderSummaryProps";
 
-const OrderSummary = ({ data, userInput }: any) => {
+const OrderSummary = ({ data, userInput } : orderSummaryProps) => {
   // Check if data is undefined or if cartItems is undefined
   if (!data || !data.cartItems) {
     // You can render a loading indicator or a message here

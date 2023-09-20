@@ -35,18 +35,16 @@ const MenuItemDetails = () => {
     }
     setIsAddingToCart(true);
 
-    const response = await updateShoppingCart({
+    const response : apiResponse = await updateShoppingCart({
       // userId: userData.nameid,
       userId : "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     });
 
-    //console.log(response);
-
-    // if(response.data && response.data.isSuccess){
-    //   toastNotify("Item added to cart successfully");
-    // }
+    if(response.data && response.data.isSuccess){
+      toastNotify("Item added to cart successfully");
+    }
 
     setIsAddingToCart(false);
   };

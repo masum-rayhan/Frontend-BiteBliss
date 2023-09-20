@@ -1,26 +1,30 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/mango.png";
-import { cartItemModel } from "../../Interfaces";
+import { cartItemModel, userModel } from "../../Interfaces";
 import { RootState } from "../../Storage/Redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  emptyUserState,
+  setLoggedInUser,
+} from "../../Storage/Redux/userAuthSlice";
 
 const Header = () => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const shoppingCartFromStore: cartItemModel[] = useSelector(
-      (state: RootState) => state.shoppingCartStore.cartItems ?? []
-    );
+  const shoppingCartFromStore: cartItemModel[] = useSelector(
+    (state: RootState) => state.shoppingCartStore.cartItems ?? []
+  );
 
-  //   const userData: userModel = useSelector(
-  //     (state: RootState) => state.userAuthStore
-  //   );
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
 
-  //   const handleLogOut = () => {
-  //     localStorage.removeItem("token");
-  //     dispatch(setLoggedInUser({...emptyUserState}));
-  //     navigate("/");
-  //   };
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    dispatch(setLoggedInUser({ ...emptyUserState }));
+    navigate("/");
+  };
 
   return (
     <div>
@@ -55,7 +59,9 @@ const Header = () => {
                   to="/shoppingCart"
                 >
                   <i className="bi bi-cart"></i>{" "}
-                  {shoppingCartFromStore?.length? `(${shoppingCartFromStore.length})` : ""}
+                  {shoppingCartFromStore?.length
+                    ? `(${shoppingCartFromStore.length})`
+                    : ""}
                 </NavLink>
               </li>
               {/* <li className="nav-item">
@@ -105,7 +111,7 @@ const Header = () => {
                 </ul>
               </li>
               <div className="d-flex" style={{ marginLeft: "auto" }}>
-                {/* {userData.nameid && ()} */}
+                {userData.nameid && (
                   <>
                     <li className="nav-item">
                       <button
@@ -116,7 +122,7 @@ const Header = () => {
                           border: "none",
                         }}
                       >
-                        Welcome, {/* {userData.unique_name} */}
+                        Welcome, {userData.unique_name}
                       </button>
                     </li>
                     <li className="nav-item">
@@ -127,15 +133,15 @@ const Header = () => {
                           height: "40px",
                           width: "100px",
                         }}
-                        // onClick={handleLogOut}
+                        onClick={handleLogOut}
                       >
                         Logout
                       </button>
                     </li>
                   </>
-                {/* )} */}
+                )}
 
-                {/* {!userData.nameid && ()} */}
+                {!userData.nameid && (
                   <>
                     <li className="nav-item text-white">
                       <NavLink className="nav-link" to="/register">
@@ -156,7 +162,7 @@ const Header = () => {
                       </NavLink>
                     </li>
                   </>
-                {/* )} */}
+                )}
               </div>
             </ul>
           </div>

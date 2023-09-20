@@ -6,6 +6,9 @@ import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { useEffect } from "react";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 import { Login, Register } from "../Pages/Auth";
+import jwt_decode from "jwt-decode";
+import { userModel } from "../Interfaces";
+import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 
 
 const App = () => {
@@ -17,14 +20,14 @@ const App = () => {
   );
 
 
-  // useEffect(() => {
-  //   const localToken = localStorage.getItem("token");
-  //   if (localToken) {
-  //     const { unique_name, nameid, email, role }: userModel =
-  //       jwt_decode(localToken);
-  //     dispatch(setLoggedInUser({ unique_name, nameid, email, role }));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    if (localToken) {
+      const { unique_name, nameid, email, role }: userModel =
+        jwt_decode(localToken);
+      dispatch(setLoggedInUser({ unique_name, nameid, email, role }));
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {

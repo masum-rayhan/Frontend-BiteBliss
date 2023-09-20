@@ -6,6 +6,7 @@ import { apiResponse, userModel } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
 import { useLoginUserMutation } from "../../Apis/authApi";
 import { setLoggedInUser } from "../../Storage/Redux/userAuthSlice";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -33,13 +34,13 @@ const Login = () => {
     });
 
     if (response.data) {
-      console.log(response.data);
       const { token } = response.data.result;
-      // const { unique_name, nameid, email, role }: userModel = jwt_decode(token);
+      const { unique_name, nameid, email, role }: userModel = jwt_decode(token);
       localStorage.setItem("token", token);
       dispatch(setLoggedInUser({ unique_name, nameid, email, role }));
       navigate("/");
-    } else if (response.error) {
+    } 
+    else if (response.error) {
       console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
     }

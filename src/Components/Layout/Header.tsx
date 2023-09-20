@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/mango.png";
+import { cartItemModel } from "../../Interfaces";
+import { RootState } from "../../Storage/Redux/store";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  //   const shoppingCartFromStore: cartItemModel[] = useSelector(
-  //     (state: RootState) => state.shoppingCartStore.cartItems ?? []
-  //   );
+    const shoppingCartFromStore: cartItemModel[] = useSelector(
+      (state: RootState) => state.shoppingCartStore.cartItems ?? []
+    );
 
   //   const userData: userModel = useSelector(
   //     (state: RootState) => state.userAuthStore
@@ -52,7 +55,7 @@ const Header = () => {
                   to="/shoppingCart"
                 >
                   <i className="bi bi-cart"></i>{" "}
-                  {/* {userData.nameid && `(${shoppingCartFromStore.length})`} */}
+                  {shoppingCartFromStore?.length? `(${shoppingCartFromStore.length})` : ""}
                 </NavLink>
               </li>
               {/* <li className="nav-item">

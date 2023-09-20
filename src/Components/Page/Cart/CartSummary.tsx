@@ -110,7 +110,7 @@ const CartSummary = () => {
             </div>
           </div>
         </div>
-      ))}
+       ))}
     </div>
   );
 };

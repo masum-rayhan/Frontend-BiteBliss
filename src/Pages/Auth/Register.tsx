@@ -4,9 +4,10 @@ import { inputHelper } from "../../Helper";
 import { apiResponse } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
 import { SD_Roles } from "../../Utils/SD";
+import { useRegisterUserMutation } from "../../Apis/authApi";
 
 const Register = () => {
-//   const [registerUser] = useRegisterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
@@ -27,19 +28,20 @@ const Register = () => {
     event.preventDefault();
     setLoading(true);
 
-    // const response: apiResponse = await registerUser({
-    //   userName: userInput.userName,
-    //   name: userInput.name,
-    //   password: userInput.password,
-    //   role: userInput.role,
-    // });
+    const response: apiResponse = await registerUser({
+      userName: userInput.userName,
+      name: userInput.name,
+      password: userInput.password,
+      role: userInput.role,
+    });
 
-    // if (response.data) {
-    //   toastNotify("User registered successfully");
-    //   navigate("/login");
-    // } else if (response.error) {
-    //   toastNotify(response.error.data.errorMessages[0], "error");
-    // }
+    if (response.data) {
+      console.log(response.data);
+      // toastNotify("User registered successfully");
+      navigate("/login");
+    } else if (response.error) {
+      // toastNotify(response.error.data.errorMessages[0], "error");
+    }
     setLoading(false);
   };
 

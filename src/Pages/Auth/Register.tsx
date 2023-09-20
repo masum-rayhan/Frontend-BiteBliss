@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { inputHelper } from "../../Helper";
+import { inputHelper, toastNotify } from "../../Helper";
 import { apiResponse } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
 import { SD_Roles } from "../../Utils/SD";
@@ -37,10 +37,10 @@ const Register = () => {
 
     if (response.data) {
       console.log(response.data);
-      // toastNotify("User registered successfully");
+      toastNotify("User registered successfully");
       navigate("/login");
     } else if (response.error) {
-      // toastNotify(response.error.data.errorMessages[0], "error");
+      toastNotify(response.error.data.errorMessages[0], "error");
     }
     setLoading(false);
   };

@@ -6,10 +6,11 @@ import { apiResponse, userModel } from "../Interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../Storage/Redux/store";
 import { MainLoader, MiniLoader } from "../Components/Page/Common";
+import { toastNotify } from "../Helper";
 
 
 const MenuItemDetails = () => {
-  // const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
   const { menuItemId } = useParams();
   const { data, isLoading } = useGetMenuItemsByIdQuery(menuItemId);
 
@@ -28,10 +29,10 @@ const MenuItemDetails = () => {
   };
 
   const handleAddToCart = async (menuItemId: number) => {
-    // if (!userData.nameid) {
-    //   navigate("/login");
-    //   return;
-    // }
+    if (!userData.nameid) {
+      navigate("/login");
+      return;
+    }
     setIsAddingToCart(true);
 
     const response = await updateShoppingCart({

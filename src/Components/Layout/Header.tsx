@@ -105,7 +105,7 @@ const Header = () => {
                 </ul>
               </li>
               <div className="d-flex" style={{ marginLeft: "auto" }}>
-                {/* {userData.nameid && (
+                {/* {userData.nameid && ()} */}
                   <>
                     <li className="nav-item">
                       <button
@@ -116,7 +116,7 @@ const Header = () => {
                           border: "none",
                         }}
                       >
-                        Welcome, {userData.unique_name}
+                        Welcome, {/* {userData.unique_name} */}
                       </button>
                     </li>
                     <li className="nav-item">
@@ -127,15 +127,15 @@ const Header = () => {
                           height: "40px",
                           width: "100px",
                         }}
-                        onClick={handleLogOut}
+                        // onClick={handleLogOut}
                       >
                         Logout
                       </button>
                     </li>
                   </>
-                )}
+                {/* )} */}
 
-                {!userData.nameid && (
+                {/* {!userData.nameid && ()} */}
                   <>
                     <li className="nav-item text-white">
                       <NavLink className="nav-link" to="/register">
@@ -156,7 +156,7 @@ const Header = () => {
                       </NavLink>
                     </li>
                   </>
-                )} */}
+                {/* )} */}
               </div>
             </ul>
           </div>

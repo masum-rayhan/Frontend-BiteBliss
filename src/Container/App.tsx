@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { useEffect } from "react";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
+import { Login, Register } from "../Pages/Auth";
 
 
 const App = () => {
@@ -42,8 +43,8 @@ const App = () => {
             element={<MenuItemDetails />}
           ></Route>
           <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
-          {/* <Route path="/register" element={<Register />}></Route> */}
-          {/* <Route path="/login" element={<Login />}></Route> */}
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/login" element={<Login />}></Route>
 
           {/* <Route path="/authentication" element={<AuthTest />}></Route> */}
           {/* <Route path="/authorization" element={<AuthTestAdmin />}></Route> */}

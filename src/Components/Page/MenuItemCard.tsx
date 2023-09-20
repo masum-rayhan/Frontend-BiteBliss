@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { menuItemModel } from "../../Interfaces";
+import { apiResponse, menuItemModel } from "../../Interfaces";
 import { Link } from "react-router-dom";
+import { useUpdateShoppingCartMutation } from "../../Apis/shoppingCartApi";
 
 
 interface Props {
@@ -11,25 +12,27 @@ const MenuItemCard = (props : Props) => {
 //   const navigate = useNavigate();
   //const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
-//   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
-  // const handleAddToCart = async (menuItemId: number) => {
-  //   if (!userData.nameid) {
-  //     navigate("/login");
-  //     return;
-  //   }
-  //   setIsAddingToCart(true);
+  const handleAddToCart = async (menuItemId: number) => {
+    // if (!userData.nameid) {
+    //   navigate("/login");
+    //   return;
+    // }
+    setIsAddingToCart(true);
 
-  //   const response : apiResponse = await updateShoppingCart({
-  //     userId: userData.nameid,
-  //     menuItemId: menuItemId,
-  //     updateQuantityBy: 1
-  //   });
-  //   if(response.data && response.data.isSuccess) {
-  //     toastNotify("Item added to cart successfully");
-  //   }
-  //   setIsAddingToCart(false);
-  // };
+    const response : apiResponse = await updateShoppingCart({
+      userId: 'b8d7ebba-5744-47a6-b974-3ca8e0b31b0f',
+      menuItemId: menuItemId,
+      updateQuantityBy: 1
+    });
+
+    console.log(response);
+    // if(response.data && response.data.isSuccess) {
+    //   toastNotify("Item added to cart successfully");
+    // }
+    setIsAddingToCart(false);
+  };
 
   
   return (
@@ -89,7 +92,7 @@ const MenuItemCard = (props : Props) => {
                 outline: "none !important",
                 cursor: "pointer",
               }}
-              // onClick={() => handleAddToCart(props.menuItem.id)}
+              onClick={() => handleAddToCart(props.menuItem.id)}
             ></i>
           )}
 

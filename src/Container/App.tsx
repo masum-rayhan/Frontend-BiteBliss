@@ -1,7 +1,7 @@
 import { Footer, Header } from "../Components/Layout"
 import { Routes, Route } from "react-router-dom";
 import { Home, MenuItemDetails, NotFound, ShoppingCart } from "../Pages";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { useEffect } from "react";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
@@ -9,14 +9,15 @@ import { AccessDenied, AuthTest, AuthTestAdmin, Login, Register } from "../Pages
 import jwt_decode from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
+import { RootState } from "../Storage/Redux/store";
 
 
 const App = () => {
   const dispatch = useDispatch();
-  // const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
   const { data, isLoading } = useGetShoppingCartQuery(
-    //userData.nameid
-    "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f"
+    userData.nameid
+    //"b8d7ebba-5744-47a6-b974-3ca8e0b31b0f"
   );
 
 

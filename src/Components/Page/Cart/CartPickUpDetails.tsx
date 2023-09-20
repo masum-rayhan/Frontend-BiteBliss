@@ -12,13 +12,14 @@ const CartPickUpDetails = () => {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
-//   const userData = useSelector((state: RootState) => state.userAuthStore);
+  const userData = useSelector((state: RootState) => state.userAuthStore);
 
   let grandTotal = 0;
   let totalItems = 0;
+  
   const initialUserData = {
-    name: "",//userData.unique_name,
-    email:"", //userData.email,
+    name: userData.unique_name,
+    email:userData.email,
     phoneNumber: "",
   };
 

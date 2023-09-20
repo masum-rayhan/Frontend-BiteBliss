@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useUpdateShoppingCartMutation } from "../../../Apis/shoppingCartApi";
 import { cartItemModel } from "../../../Interfaces";
 import { RootState } from "../../../Storage/Redux/store";
-
+import { removeFromCart, updateQuantity } from "../../../Storage/Redux/shoppingCartSlice";
 
 const CartSummary = () => {
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
@@ -10,43 +10,43 @@ const CartSummary = () => {
   const shoppingCartFromStore: cartItemModel[] = useSelector(
     (state: RootState) => state.shoppingCartStore.cartItems ?? []
   );
-//   const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  //   const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
 
   if (!shoppingCartFromStore) {
     return <div>Shopping Cart Empty</div>;
   }
 
-  // const handleQuantity = (
-  //   updateQuantityBy: number,
-  //   cartItem: cartItemModel
-  // ) => {
-  //   if (
-  //     (updateQuantityBy == -1 && cartItem.quantity == 1) ||
-  //     updateQuantityBy == 0
-  //   ) {
-  //     //remove item
-  //     updateShoppingCart({
-  //       // userId: userData.nameid,
-  //       userId: "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
-  //       menuItemId: cartItem.menuItem?.id,
-  //       updateQuantityBy: updateQuantityBy,
-  //     });
-  //   //   dispatch(removeFromCart({ cartItem, quantity: 0 }));
-  //   } else {
-  //     //update quantity
-  //     updateShoppingCart({
-  //       userId: "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
-  //       menuItemId: cartItem.menuItem?.id,
-  //       updateQuantityBy: updateQuantityBy,
-  //     });
-  //   //   dispatch(
-  //   //     updateQuantity({
-  //   //       cartItem,
-  //   //       quantity: cartItem.quantity! + updateQuantityBy,
-  //   //     })
-  //   //   );
-  //   }
-  // };
+  const handleQuantity = (
+    updateQuantityBy: number,
+    cartItem: cartItemModel
+  ) => {
+    if (
+      (updateQuantityBy == -1 && cartItem.quantity == 1) ||
+      updateQuantityBy == 0
+    ) {
+      //remove item
+      updateShoppingCart({
+        // userId: userData.nameid,
+        userId: "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
+        menuItemId: cartItem.menuItem?.id,
+        updateQuantityBy: updateQuantityBy,
+      });
+        dispatch(removeFromCart({ cartItem, quantity: 0 }));
+    } else {
+      //update quantity
+      updateShoppingCart({
+        userId: "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
+        menuItemId: cartItem.menuItem?.id,
+        updateQuantityBy: updateQuantityBy,
+      });
+        dispatch(
+          updateQuantity({
+            cartItem,
+            quantity: cartItem.quantity! + updateQuantityBy,
+          })
+        );
+    }
+  };
 
   return (
     <div className="container p-4 m-2">
@@ -87,7 +87,7 @@ const CartSummary = () => {
                 <span style={{ color: "rgba(22,22,22,.7)" }} role="button">
                   <i
                     className="bi bi-dash-circle-fill"
-                    // onClick={() => handleQuantity(-1, cartItem)}
+                    onClick={() => handleQuantity(-1, cartItem)}
                   ></i>
                 </span>
                 <span>
@@ -96,14 +96,14 @@ const CartSummary = () => {
                 <span style={{ color: "rgba(22,22,22,.7)" }} role="button">
                   <i
                     className="bi bi-plus-circle-fill"
-                    // onClick={() => handleQuantity(1, cartItem)}
+                    onClick={() => handleQuantity(1, cartItem)}
                   ></i>
                 </span>
               </div>
 
               <button
                 className="btn btn-danger mx-1"
-                // onClick={() => handleQuantity(0, cartItem)}
+                onClick={() => handleQuantity(0, cartItem)}
               >
                 Remove
               </button>

@@ -9,7 +9,6 @@ const ShoppingCart = () => {
       </div>
       <div className="col-lg-6 col-12 p-4" style={{ fontWeight: 300 }}>
         <CartPickUpDetails />
-        Details
       </div>
     </div>
   );

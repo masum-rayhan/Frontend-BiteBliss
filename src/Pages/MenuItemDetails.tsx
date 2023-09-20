@@ -37,7 +37,7 @@ const MenuItemDetails = () => {
 
     const response : apiResponse = await updateShoppingCart({
       // userId: userData.nameid,
-      userId : "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
+      userId : userData.nameid,
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
     });

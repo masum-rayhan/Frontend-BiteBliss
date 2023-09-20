@@ -12,7 +12,7 @@ import { apiResponse, cartItemModel } from "../../../Interfaces";
 import { orderSummaryProps } from "../Order/orderSummaryProps";
 import { useCreateOrderMutation } from "../../../Apis/orderAPI";
 
-const PaymentForm = ({data, userInput} : orderSummaryProps) => {
+const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
   const navigate = useNavigate();
   const [createOrder] = useCreateOrderMutation();
   const stripe = useStripe();
@@ -37,7 +37,7 @@ const PaymentForm = ({data, userInput} : orderSummaryProps) => {
       redirect: "if_required",
     });
 
-    console.log(result)
+    console.log(result);
 
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
@@ -80,10 +80,12 @@ const PaymentForm = ({data, userInput} : orderSummaryProps) => {
             : SD_OrderStatus.PENDING,
       });
 
+      console.log(response);
+
       if (response) {
         if (response.data?.result.status == SD_OrderStatus.CONFIRMED) {
           navigate(
-            `/order/orderConfirmed/${response.data?.result.orderHeaderId}`
+            `/order/orderConfirmed/${response.data.result.applicationUserId}`
           );
         } else {
           navigate("/failed");
@@ -96,7 +98,14 @@ const PaymentForm = ({data, userInput} : orderSummaryProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button className="btn btn-success mt-5 w-100">Submit</button>
+      <button
+        disabled={!stripe || isProcessing}
+        className="btn btn-success mt-5 w-100"
+      >
+        <span className="button-text">
+          {isProcessing ? "Processing..." : "Submit Order"}
+        </span>
+      </button>
     </form>
   );
 };

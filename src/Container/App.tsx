@@ -1,26 +1,38 @@
-import { Footer, Header } from "../Components/Layout"
+import { Footer, Header } from "../Components/Layout";
 import { Routes, Route } from "react-router-dom";
-import { Home, MenuItemDetails, NotFound, ShoppingCart } from "../Pages";
+import {
+  Home,
+  MenuItemDetails,
+  NotFound,
+  OrderConfirmed,
+  ShoppingCart,
+} from "../Pages";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
 import { useEffect } from "react";
 import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
-import { AccessDenied, AuthTest, AuthTestAdmin, Login, Register } from "../Pages/Auth";
+import {
+  AccessDenied,
+  AuthTest,
+  AuthTestAdmin,
+  Login,
+  Register,
+} from "../Pages/Auth";
 import jwt_decode from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { RootState } from "../Storage/Redux/store";
 import { Payment } from "../Pages/Payment";
 
-
 const App = () => {
   const dispatch = useDispatch();
-  const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
+  const userData: userModel = useSelector(
+    (state: RootState) => state.userAuthStore
+  );
   const { data, isLoading } = useGetShoppingCartQuery(
     userData.nameid
     //"b8d7ebba-5744-47a6-b974-3ca8e0b31b0f"
   );
-
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
@@ -56,7 +68,10 @@ const App = () => {
           <Route path="/accessDenied" element={<AccessDenied />}></Route>
 
           <Route path="/payment" element={<Payment />}></Route>
-          {/* <Route path="/order/orderConfirmed/:id" element={<OrderConfirmed />}></Route> */}
+          <Route
+            path="/order/orderConfirmed/:id"
+            element={<OrderConfirmed />}
+          ></Route>
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
@@ -67,4 +82,3 @@ const App = () => {
 };
 
 export default App;
-

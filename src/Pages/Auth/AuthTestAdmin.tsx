@@ -1,3 +1,4 @@
+import { withAuth } from "../../HOC";
 
  const AuthTestAdmin = () => {
   return (
@@ -5,4 +6,4 @@
   )
 }
 
-export default AuthTestAdmin;
+export default withAuth(AuthTestAdmin);

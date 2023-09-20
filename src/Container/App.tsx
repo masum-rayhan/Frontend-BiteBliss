@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   Home,
   MenuItemDetails,
+  MyOrders,
   NotFound,
   OrderConfirmed,
   ShoppingCart,
@@ -71,6 +72,10 @@ const App = () => {
           <Route
             path="/order/orderConfirmed/:id"
             element={<OrderConfirmed />}
+          ></Route>
+          <Route
+            path="/order/myOrders"
+            element={<MyOrders />}
           ></Route>
 
           <Route path="*" element={<NotFound />}></Route>

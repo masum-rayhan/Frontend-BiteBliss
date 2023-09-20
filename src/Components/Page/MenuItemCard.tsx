@@ -2,6 +2,7 @@ import { useState } from "react";
 import { apiResponse, menuItemModel } from "../../Interfaces";
 import { Link } from "react-router-dom";
 import { useUpdateShoppingCartMutation } from "../../Apis/shoppingCartApi";
+import { MiniLoader } from "./Common";
 
 
 interface Props {
@@ -78,7 +79,7 @@ const MenuItemCard = (props : Props) => {
                 right: "15px",
               }}
             >
-              {/* <MiniLoader /> */}
+              <MiniLoader />
             </div>
           ) : (
             <i

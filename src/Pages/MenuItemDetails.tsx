@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useGetMenuItemsByIdQuery } from "../Apis/menuItemApi";
 import { useNavigate, useParams } from "react-router-dom";
+import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
+import { apiResponse, userModel } from "../Interfaces";
+import { useSelector } from "react-redux";
+import { RootState } from "../Storage/Redux/store";
 
 
 const MenuItemDetails = () => {
@@ -12,7 +16,7 @@ const MenuItemDetails = () => {
 
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
-//   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
   const handleQuantity = (event: number) => {
     let newQuantity = quantity + event;
@@ -22,25 +26,28 @@ const MenuItemDetails = () => {
     setQuantity(newQuantity);
   };
 
-  // const handleAddToCart = async (menuItemId: number) => {
-  //   if (!userData.nameid) {
-  //     navigate("/login");
-  //     return;
-  //   }
-  //   setIsAddingToCart(true);
+  const handleAddToCart = async (menuItemId: number) => {
+    // if (!userData.nameid) {
+    //   navigate("/login");
+    //   return;
+    // }
+    setIsAddingToCart(true);
 
-  //   const response : apiResponse= await updateShoppingCart({
-  //     userId: userData.nameid,
-  //     menuItemId: menuItemId,
-  //     updateQuantityBy: quantity,
-  //   });
+    const response = await updateShoppingCart({
+      // userId: userData.nameid,
+      userId : "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f",
+      menuItemId: menuItemId,
+      updateQuantityBy: quantity,
+    });
 
-  //   if(response.data && response.data.isSuccess){
-  //     toastNotify("Item added to cart successfully");
-  //   }
+    console.log(response);
 
-  //   setIsAddingToCart(false);
-  // };
+    // if(response.data && response.data.isSuccess){
+    //   toastNotify("Item added to cart successfully");
+    // }
+
+    setIsAddingToCart(false);
+  };
 
   return (
     <div className="container pt-4 pt-md-5">
@@ -92,7 +99,7 @@ const MenuItemDetails = () => {
                   </button>
                 ) : (
                   <button
-                    // onClick={() => handleAddToCart(data.result?.id)}
+                    onClick={() => handleAddToCart(data.result?.id)}
                     className="btn btn-success form-control"
                   >
                     Add to Cart

@@ -4,6 +4,7 @@ import { cartItemModel } from "../../../Interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Storage/Redux/store";
 import { MiniLoader } from "../Common";
+import { inputHelper } from "../../../Helper";
 
 const CartPickUpDetails = () => {
 //   const [initiatePayment] = useInitiatePaymentMutation();
@@ -15,17 +16,17 @@ const CartPickUpDetails = () => {
 
   let grandTotal = 0;
   let totalItems = 0;
-//   const initialUserData = {
-//     name: userData.unique_name,
-//     email: userData.email,
-//     phoneNumber: "",
-//   };
+  const initialUserData = {
+    name: "",//userData.unique_name,
+    email:"", //userData.email,
+    phoneNumber: "",
+  };
 
-//   const [userInput, setUserInput] = useState(initialUserData);
+  const [userInput, setUserInput] = useState(initialUserData);
 
   const handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const tempData = inputHelper(event, userInput);
-    // setUserInput(tempData);
+    const tempData = inputHelper(event, userInput);
+    setUserInput(tempData);
   };
 
   shoppingCartFromStore?.map((cartItem: cartItemModel) => {
@@ -59,7 +60,7 @@ const CartPickUpDetails = () => {
           Pickup Name
           <input
             type="text"
-            // value={userInput.name}
+            value={userInput.name}
             className="form-control"
             placeholder="name..."
             onChange={handleUserInput}
@@ -71,7 +72,7 @@ const CartPickUpDetails = () => {
           Pickup Email
           <input
             type="email"
-            // value={userInput.email}
+            value={userInput.email}
             className="form-control"
             placeholder="email..."
             onChange={handleUserInput}
@@ -84,7 +85,7 @@ const CartPickUpDetails = () => {
           Pickup Phone Number
           <input
             type="number"
-            // value={userInput.phoneNumber}
+            value={userInput.phoneNumber}
             className="form-control"
             placeholder="phone number..."
             onChange={handleUserInput}

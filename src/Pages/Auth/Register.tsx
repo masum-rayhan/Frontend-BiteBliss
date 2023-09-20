@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { inputHelper } from "../../Helper";
 import { apiResponse } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
+import { SD_Roles } from "../../Utils/SD";
 
 const Register = () => {
 //   const [registerUser] = useRegisterUserMutation();
@@ -90,8 +91,8 @@ const Register = () => {
               onChange={handleInputUser}
             >
               <option value="">--Select Role--</option>
-              {/* <option value={`${SD_Roles.CUSTOMER}`}>Customer</option>
-              <option value={`${SD_Roles.ADMIN}`}>Admin</option> */}
+              <option value={`${SD_Roles.CUSTOMER}`}>Customer</option>
+              <option value={`${SD_Roles.ADMIN}`}>Admin</option>
             </select>
           </div>
         </div>

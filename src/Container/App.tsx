@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import { userModel } from "../Interfaces";
 import { setLoggedInUser } from "../Storage/Redux/userAuthSlice";
 import { RootState } from "../Storage/Redux/store";
+import { Payment } from "../Pages/Payment";
 
 
 const App = () => {
@@ -54,7 +55,7 @@ const App = () => {
           <Route path="/authorization" element={<AuthTestAdmin />}></Route>
           <Route path="/accessDenied" element={<AccessDenied />}></Route>
 
-          {/* <Route path="/payment" element={<Payment />}></Route> */}
+          <Route path="/payment" element={<Payment />}></Route>
           {/* <Route path="/order/orderConfirmed/:id" element={<OrderConfirmed />}></Route> */}
 
           <Route path="*" element={<NotFound />}></Route>

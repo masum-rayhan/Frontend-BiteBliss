@@ -8,11 +8,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toastNotify } from "../../../Helper";
 import { SD_OrderStatus } from "../../../Utils/SD";
-import { apiResponse } from "../../../Interfaces";
+import { apiResponse, cartItemModel } from "../../../Interfaces";
+import { orderSummaryProps } from "../Order/orderSummaryProps";
+import { useCreateOrderMutation } from "../../../Apis/orderAPI";
 
-const PaymentForm = () => {
+const PaymentForm = ({data, userInput} : orderSummaryProps) => {
   const navigate = useNavigate();
-  // const [createOrder] = useCreateOrderMutation();
+  const [createOrder] = useCreateOrderMutation();
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -45,48 +47,48 @@ const PaymentForm = () => {
     } else {
       console.log(result);
 
-    //   let grandTotal = 0;
-    //   let totalItems = 0;
+      let grandTotal = 0;
+      let totalItems = 0;
 
-    //   const orderDetailsDTO: any[] = [];
+      const orderDetailsDTO: any[] = [];
 
-      // data.cartItems.forEach((item: cartItemModel) => {
-      //   const tempOrderDetails: any = {};
-      //   tempOrderDetails["menuItemId"] = item.menuItem?.id;
-      //   tempOrderDetails["quantity"] = item.quantity;
-      //   tempOrderDetails["itemName"] = item.menuItem?.name;
-      //   tempOrderDetails["price"] = item.menuItem?.price;
+      data.cartItems.forEach((item: cartItemModel) => {
+        const tempOrderDetails: any = {};
+        tempOrderDetails["menuItemId"] = item.menuItem?.id;
+        tempOrderDetails["quantity"] = item.quantity;
+        tempOrderDetails["itemName"] = item.menuItem?.name;
+        tempOrderDetails["price"] = item.menuItem?.price;
 
-      //   orderDetailsDTO.push(tempOrderDetails);
+        orderDetailsDTO.push(tempOrderDetails);
 
-      //   grandTotal += item.menuItem?.price! * item.quantity!;
-      //   totalItems += item.quantity!;
-      // });
+        grandTotal += item.menuItem?.price! * item.quantity!;
+        totalItems += item.quantity!;
+      });
 
-      // const response: apiResponse = await createOrder({
-      //   pickupName: userInput.name,
-      //   pickupPhoneNumber: userInput.phoneNumber,
-      //   pickupEmail: userInput.email,
-      //   orderTotal: grandTotal,
-      //   totalItems: totalItems,
-      //   orderDetailsDTO: orderDetailsDTO,
-      //   stripePaymentIntentId: data.stripePaymentIntentId,
-      //   applicationUserId: data.userId,
-      //   status:
-      //     result.paymentIntent?.status === "succeeded"
-      //       ? SD_OrderStatus.CONFIRMED
-      //       : SD_OrderStatus.PENDING,
-      // });
+      const response: apiResponse = await createOrder({
+        pickupName: userInput.name,
+        pickupPhoneNumber: userInput.phoneNumber,
+        pickupEmail: userInput.email,
+        orderTotal: grandTotal,
+        totalItems: totalItems,
+        orderDetailsDTO: orderDetailsDTO,
+        stripePaymentIntentId: data.stripePaymentIntentId,
+        applicationUserId: data.userId,
+        status:
+          result.paymentIntent?.status === "succeeded"
+            ? SD_OrderStatus.CONFIRMED
+            : SD_OrderStatus.PENDING,
+      });
 
-      // if (response) {
-      //   if (response.data?.result.status == SD_OrderStatus.CONFIRMED) {
-      //     navigate(
-      //       `/order/orderConfirmed/${response.data?.result.orderHeaderId}`
-      //     );
-      //   } else {
-      //     navigate("/failed");
-      //   }
-      // }
+      if (response) {
+        if (response.data?.result.status == SD_OrderStatus.CONFIRMED) {
+          navigate(
+            `/order/orderConfirmed/${response.data?.result.orderHeaderId}`
+          );
+        } else {
+          navigate("/failed");
+        }
+      }
     }
     setIsProcessing(false);
   };

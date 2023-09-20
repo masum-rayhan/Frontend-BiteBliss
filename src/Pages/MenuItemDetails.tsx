@@ -5,6 +5,7 @@ import { useUpdateShoppingCartMutation } from "../Apis/shoppingCartApi";
 import { apiResponse, userModel } from "../Interfaces";
 import { useSelector } from "react-redux";
 import { RootState } from "../Storage/Redux/store";
+import { MainLoader, MiniLoader } from "../Components/Page/Common";
 
 
 const MenuItemDetails = () => {
@@ -95,7 +96,7 @@ const MenuItemDetails = () => {
               <div className="col-5">
                 {isAddingToCart ? (
                   <button disabled className="btn btn-success form-control">
-                    {/* <MiniLoader /> */}
+                    <MiniLoader />
                   </button>
                 ) : (
                   <button
@@ -131,7 +132,7 @@ const MenuItemDetails = () => {
           className="d-flex justify-content-center"
           style={{ width: "100%" }}
         >
-          {/* <MainLoader /> */}
+          <MainLoader />
         </div>
       )}
     </div>

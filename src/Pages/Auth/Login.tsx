@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { inputHelper } from "../../Helper";
-import { userModel } from "../../Interfaces";
+import { apiResponse, userModel } from "../../Interfaces";
 import { MainLoader } from "../../Components/Page/Common";
+import { useLoginUserMutation } from "../../Apis/authApi";
+import { setLoggedInUser } from "../../Storage/Redux/userAuthSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
-//   const [loginUser] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState({
@@ -25,22 +27,22 @@ const Login = () => {
     event.preventDefault();
     setLoading(true);
 
-    // const response: apiResponse = await loginUser({
-    //   userName: userInput.userName,
-    //   password: userInput.password,
-    // });
+    const response: apiResponse = await loginUser({
+      userName: userInput.userName,
+      password: userInput.password,
+    });
 
-    // if (response.data) {
-    //   console.log(response.data);
-    //   const { token } = response.data.result;
-    //   const { unique_name, nameid, email, role }: userModel = jwt_decode(token);
-    //   localStorage.setItem("token", token);
-    //   dispatch(setLoggedInUser({ unique_name, nameid, email, role }));
-    //   navigate("/");
-    // } else if (response.error) {
-    //   console.log(response.error.data.errorMessages[0]);
-    //   setError(response.error.data.errorMessages[0]);
-    // }
+    if (response.data) {
+      console.log(response.data);
+      const { token } = response.data.result;
+      // const { unique_name, nameid, email, role }: userModel = jwt_decode(token);
+      localStorage.setItem("token", token);
+      dispatch(setLoggedInUser({ unique_name, nameid, email, role }));
+      navigate("/");
+    } else if (response.error) {
+      console.log(response.error.data.errorMessages[0]);
+      setError(response.error.data.errorMessages[0]);
+    }
     setLoading(false);
   };
 

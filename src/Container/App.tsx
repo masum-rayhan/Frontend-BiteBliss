@@ -1,15 +1,19 @@
 import { Footer, Header } from "../Components/Layout"
 import { Routes, Route } from "react-router-dom";
-import { Home, MenuItemDetails, NotFound } from "../Pages";
+import { Home, MenuItemDetails, NotFound, ShoppingCart } from "../Pages";
+import { useDispatch } from "react-redux";
+import { useGetShoppingCartQuery } from "../Apis/shoppingCartApi";
+import { useEffect } from "react";
+import { setShoppingCart } from "../Storage/Redux/shoppingCartSlice";
 
 
 const App = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const userData : userModel = useSelector((state: RootState) => state.userAuthStore);
-  // const { data, isLoading } = useGetShoppingCartQuery(
-  //   userData.nameid
-  //   //"b8d7ebba-5744-47a6-b974-3ca8e0b31b0f"
-  // );
+  const { data, isLoading } = useGetShoppingCartQuery(
+    //userData.nameid
+    "b8d7ebba-5744-47a6-b974-3ca8e0b31b0f"
+  );
 
 
   // useEffect(() => {
@@ -21,11 +25,11 @@ const App = () => {
   //   }
   // }, []);
 
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     dispatch(setShoppingCart(data.result?.cartItems));
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(setShoppingCart(data.result?.cartItems));
+    }
+  }, [data]);
 
   return (
     <div>
@@ -37,7 +41,7 @@ const App = () => {
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetails />}
           ></Route>
-          {/* <Route path="/shopping-cart" element={<ShoppingCart />}></Route> */}
+          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
           {/* <Route path="/register" element={<Register />}></Route> */}
           {/* <Route path="/login" element={<Login />}></Route> */}
 

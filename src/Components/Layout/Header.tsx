@@ -49,7 +49,7 @@ const Header = () => {
                 <NavLink
                   className="nav-link"
                   aria-current="page"
-                  to="/shopping-cart"
+                  to="/shoppingCart"
                 >
                   <i className="bi bi-cart"></i>{" "}
                   {/* {userData.nameid && `(${shoppingCartFromStore.length})`} */}

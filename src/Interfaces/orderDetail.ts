@@ -1,7 +1,7 @@
 import { menuItemModel } from ".";
 
 export default interface orderDetail {
-    orderDetailsId?: number;
+    orderDetailId?: number;
     orderHeaderId?: number;
     menuItemId?: number;
     menuItem?: menuItemModel;

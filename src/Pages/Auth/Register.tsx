@@ -36,7 +36,7 @@ const Register = () => {
     });
 
     if (response.data) {
-      console.log(response.data);
+      //console.log(response.data);
       toastNotify("User registered successfully");
       navigate("/login");
     } else if (response.error) {

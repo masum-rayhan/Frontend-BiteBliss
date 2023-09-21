@@ -19,8 +19,7 @@ const MenuItemList = () => {
   }, [isLoading]);
 
   if (isLoading) return <MainLoader/>;
-
-  console.log(data);
+  
   return (
     <div className="container row">
       {data.result.length > 0 &&

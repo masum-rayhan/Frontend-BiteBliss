@@ -37,7 +37,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
       redirect: "if_required",
     });
 
-    console.log(result);
+    //console.log(result);
 
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
@@ -45,7 +45,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
 
       setIsProcessing(false);
     } else {
-      console.log(result);
+      //console.log(result);
 
       let grandTotal = 0;
       let totalItems = 0;
@@ -80,7 +80,7 @@ const PaymentForm = ({ data, userInput }: orderSummaryProps) => {
             : SD_OrderStatus.PENDING,
       });
 
-      console.log(response);
+     // console.log(response);
 
       if (response) {
         if (response.data?.result.status == SD_OrderStatus.CONFIRMED) {
